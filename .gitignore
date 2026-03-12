@@ -4,3 +4,4 @@ node_modules/
 __pycache__/
 load_data.py
 SPEC.md
+.next/
