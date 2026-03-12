@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { insuranceAgencies } from "@/lib/schema";
-import { ilike, eq, and, isNotNull, isNull, or, count } from "drizzle-orm";
+import { ilike, eq, and, isNotNull, isNull, or, count, asc } from "drizzle-orm";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -54,7 +54,7 @@ export async function GET(request: NextRequest) {
       .where(whereClause)
       .limit(limit)
       .offset(offset)
-      .orderBy(insuranceAgencies.id),
+      .orderBy(asc(insuranceAgencies.agencyName)),
     db
       .select({ count: count() })
       .from(insuranceAgencies)
